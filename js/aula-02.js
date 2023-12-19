@@ -17,11 +17,11 @@
         age: 12
     }
 
-    if (user.name == undefined && typeof (user.name) != "string") {
+    if (user.name == undefined || typeof (user.name) != "string") {
         console.log("O usuário não tem nome registrado!")
-    } else if (user.sex == undefined && typeof (user.sex) != "string") {
+    } else if (user.sex == undefined || typeof (user.sex) != "string") {
         console.log("O usuário não tem sexo registrado!")
-    } else if (user.age == undefined && typeof (user.age) != "number") {
+    } else if (user.age == undefined || typeof (user.age) != "number") {
         console.log("O usuário não tem idade registrado!")
     } else {
         console.log(`O usuário ${user.name} do sexo ${user.sex} tem ${user.age} ano(s)!`)
@@ -101,7 +101,7 @@
     function compareByPrice(a, b) {
         return a.price - b.price;
     }
-    
+
     const products = [
         {
             name: 'Caixa de Sabão Z',
