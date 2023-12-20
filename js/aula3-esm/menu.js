@@ -1,13 +1,15 @@
-function calculator(comando, a, b) {
+import {soma,subt,mult,divi} from "./operacoes.js"
+
+export function calculator(comando, a, b) {
     switch (comando) {
         case "soma":
-            return operations.soma(a, b)
+            return soma(a, b)
         case "subtração":
-            return operations.subt(a, b)
+            return subt(a, b)
         case "multiplicação":
-            return operations.mult(a, b)
+            return mult(a, b)
         case "divisão":
-            return operations.divi(a, b)
+            return divi(a, b)
         default:
             console.log("Comando invalido")
             return null

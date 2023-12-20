@@ -1,3 +1,5 @@
+import { calculator } from './aula3-esm/menu.js';
+
 {
     function order5String(...args) {
         for (let arg of args) {
@@ -23,7 +25,7 @@
         }
     }
 
-    numeros = [1, 2, 4, 5, 3, 2, 7, 9, 0, 2]
+    let numeros = [1, 2, 4, 5, 3, 2, 7, 9, 0, 2]
     console.log(multArrayFrontBack(numeros))
 }
 
@@ -79,8 +81,11 @@
 
 
 {
-    const calc = require('./aula3-commonjs/menu.js')
-    let divisao = calc.calculator("divisão", 9, 4)
-    console.log(divisao)
+    //const calc = require('./aula3-commonjs/menu.js')
+    //let divisao = calc.calculator("divisão", 9, 4)
+    //console.log(divisao)
 }
 
+{
+    console.log(calculator("soma", 356, 4))
+}
