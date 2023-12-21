@@ -60,11 +60,52 @@
 }
 
 {
-    function funcao(numeros){
-        
+
+    function funcao(numeros) {
+        let soma = 0;
+        numeros.forEach(element => {
+            if (element % 2 == 1) soma += element
+        });
+        return soma
     }
+
     let numeros = [0, 2, 1, 5, 7, 0, 2, 21, 1, 3]
     //Números a serem somados 1, 5, 7, 21, 1,3 
     let resultado = funcao(numeros)
-    console.log(numeros)
+    console.log(resultado)
+}
+
+{
+    function funcao(numeros) {
+        let soma = numeros.reduce((acc, val) => (val % 2 == 1 ? acc + val : acc));
+        return soma
+    }
+
+    let numeros = [0, 2, 1, 5, 7, 0, 2, 21, 1, 3]
+    //Números a serem somados 1, 5, 7, 21, 1,3 
+    let resultado = funcao(numeros)
+    console.log(resultado)
+}
+
+{
+    function selecionaInadimplentes(usuarios) {
+        const inadimplentes = []
+        usuarios.forEach(element => {
+            if (element.pagamento == "pendente") inadimplentes.push(element.nome)
+        });
+        return inadimplentes
+    }
+
+    let usuarios = [
+        { id: 1, nome: "Fulano de Tal", pagamento: "pendente" },
+        { id: 2, nome: "Ronaldo Nazário", pagamento: "pago" },
+        { id: 3, nome: "Michael Jordan", pagamento: "pago" },
+        { id: 4, nome: "Maria Rios", pagamento: "pago" },
+        { id: 5, nome: "Julia Sousa", pagamento: "pago" },
+        { id: 6, nome: "José Neymar", pagamento: "pendente" },
+        { id: 7, nome: "Mariana Riacho", pagamento: "pago" },
+        { id: 8, nome: "Fabiana Beatriz", pagamento: "pendente" },
+    ]
+    let inadimplentes = selecionaInadimplentes(usuarios)
+    console.log(inadimplentes)
 }
