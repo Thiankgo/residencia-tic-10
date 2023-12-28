@@ -187,64 +187,64 @@
     */
 }
 
-// {
-//     const fs = require('fs').promises
+{
+    const fs = require('fs').promises
 
-//     const usersString = fs.readFile("./js/data6/users.csv", 'utf-8', 'r')
+    const usersString = fs.readFile("./js/data6/users.csv", 'utf-8', 'r')
 
-//     usersString.then(total => {
-//         console.log(total)
-//     })
-// }
+    usersString.then(total => {
+        console.log(total)
+    })
+}
 
 
-// {
-//     function loadCSV(csv) {
-//         const objs = []
-//         const list = []
-//         const linhas = csv.split('\n')
-//         for (let linha of linhas) {
-//             list.push(linha.split(','))
-//         }
+{
+    function loadCSV(csv) {
+        const objs = []
+        const list = []
+        const linhas = csv.split('\n')
+        for (let linha of linhas) {
+            list.push(linha.split(','))
+        }
 
-//         const params = [...list[0]]
+        const params = [...list[0]]
 
-//         for (let i = 1; i < list.length; i++) {
-//             const obj = {}
-//             for (let p = 0; p < params.length; p++) {
-//                 obj[params[p]] = list[i][p]
-//             }
-//             objs.push(obj)
-//         }
+        for (let i = 1; i < list.length; i++) {
+            const obj = {}
+            for (let p = 0; p < params.length; p++) {
+                obj[params[p]] = list[i][p]
+            }
+            objs.push(obj)
+        }
 
-//         return objs
-//     }
+        return objs
+    }
 
-//     async function printUsers() {
-//         const usersString = fs.readFile("./js/data6/users.csv", 'utf-8', 'r')
-//         const addressesString = fs.readFile("./js/data6/address.csv", 'utf-8', 'r')
+    async function printUsers() {
+        const usersString = fs.readFile("./js/data6/users.csv", 'utf-8', 'r')
+        const addressesString = fs.readFile("./js/data6/address.csv", 'utf-8', 'r')
         
-//         let users = [...loadCSV((await usersString))]
-//         console.log(users)
-//         let addresses = [...loadCSV((await addressesString))]
-//         console.log(addresses)
+        let users = [...loadCSV((await usersString))]
+        console.log(users)
+        let addresses = [...loadCSV((await addressesString))]
+        console.log(addresses)
 
-//         return new Promise((resolve) => {
-//             resolve({users,addresses})
-//         });
-//     }
+        return new Promise((resolve) => {
+            resolve({users,addresses})
+        });
+    }
 
-//     const fs = require('fs').promises
-//     printUsers().then(({users,addresses}) => {
-//         for (let user of users) {
-//             for (let address of addresses) {
-//                 if (address.idUser == user.id) {
-//                     console.log(`Usuário: ${user.name}\nEndereço: ${address.address}, ${address.number}\n`)
-//                 }
-//             }
-//         }
-//       });
-// }
+    const fs = require('fs').promises
+    printUsers().then(({users,addresses}) => {
+        for (let user of users) {
+            for (let address of addresses) {
+                if (address.idUser == user.id) {
+                    console.log(`Usuário: ${user.name}\nEndereço: ${address.address}, ${address.number}\n`)
+                }
+            }
+        }
+      });
+}
 
 {
     new Promise((resolve) => {
