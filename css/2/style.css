@@ -1,0 +1,18 @@
+#label-id{
+    /* transition: 1.5s; */
+    position: absolute;
+    transform: translate(-177px, -20px);
+    color: green;
+    transition: 1.5s;
+}
+
+input:placeholder-shown + #label-id {
+    transition: 1.5s;
+    transform: translate(-170px, 2px);
+}
+
+input:invalid + #label-id {
+    transition: 1.5s;
+    color: red;
+}
+

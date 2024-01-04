@@ -1,0 +1,27 @@
+* {
+    color: white;
+    line-height: 120%;
+    padding: 0;
+}
+
+div {
+    padding: 16px;
+    margin: 4px;
+    background-color: #3730a3;
+    border-radius: 8px;
+    width: 30%;
+}
+
+h1 {
+    color: #f1f5f9;
+}
+
+dl {
+    padding: 8px 12px;
+    background-color: #706da3;
+    border-radius: 4px;
+}
+
+dt{
+    font-weight: 700;
+}
