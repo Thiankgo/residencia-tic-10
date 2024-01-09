@@ -14,7 +14,23 @@ function App() {
       username: "Thiago",
       avatar: avatar,
       photo: photo,
-      totalLikes: 12
+      totalLikes: 12,
+      comments: [
+        {
+          id: 1,
+          username: "Thiago",
+          avatar: avatar,
+          content: "Lorem ipsummm",
+          totalLikes: 12
+        },
+        {
+          id: 2,
+          username: "Thiago",
+          avatar: avatar,
+          content: "Lorem ipsummm",
+          totalLikes: 12
+        },
+      ]
     },
     {
       id: 2,
@@ -41,9 +57,10 @@ function App() {
 
   return (
     <>
-      <Header/>
+      <Header />
       {arrayPost.map(post => (
-        <Card post={post}/>
+        <Card post={post} key={post.id} />
+        
       ))}
     </>
   )

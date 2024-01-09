@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 
-<header>
+<head>
     <link rel="stylesheet" href="style.css">
-    <nav id="headerbar">
-        <div id="logo">
-            <img src="./img/image 1.png" alt="" srcset="">
-        </div>
-        <div id="navibar">
-            <button>Home</button>
-            <button>Sobre</button>
-            <button>Como Funciona</button>
-            <button>Serviços</button>
-            <button>Contate-nos</button>
-        </div>
-        <div id="loginbutton">
-            <button>Login</button>
-        </div>
-    </nav>
-</header>
+</head>
 
 <body>
+    <header>
+        <nav class="headerbar">
+            <div class="logo">
+                <img src="./img/image 1.png" alt="" srcset="">
+            </div>
+            <div class="navibar">
+                <div class="navButtons">
+                    <button>Home</button>
+                    <button>Sobre</button>
+                    <button>Como Funciona</button>
+                    <button>Serviços</button>
+                    <button>Contate-nos</button>
+                </div>
+                <button class="loginButton">Login</button>
+
+            </div>
+        </nav>
+    </header>
     <main>
-        <section id="sec1">
-            <div>
+        <section class="sec1">
+            <div class="banner">
                 <h1>Empresa de Restauração em encanamentos</h1>
                 <div>
                     <img src="img/Rectangle 20.png" alt="" srcset="">
@@ -36,26 +39,26 @@
                     <img src="img/Rectangle 22.png" alt="" srcset="">
                     <p>Trabalhos diretamente com a empresa de seguros</p>
                 </div>
-                <div id="buttons">
-                    <button id="cotacao">FAÇA SUA COTAÇÃO</button>
-                    <button id="fale-conosco">FALE CONOSCO</button>
+                <div class="buttons">
+                    <button class="cotacao">FAÇA SUA COTAÇÃO</button>
+                    <button class="fale-conosco">FALE CONOSCO</button>
                 </div>
             </div>
-            <div>
+            <div class="bannerimg">
                 <img src="./img/Rectangle 3.png" alt="" srcset="">
             </div>
         </section>
-        <section id="sec2">
-            <div id="title2">
+        <section class="sec2">
+            <div class="title2">
                 <h2>24/7 Serviços de danos em encamento, danos por incêndio, eliminação de bolor e riscos biológicos em
                     Charlotte</h2>
             </div>
-            <div id="subtitle2">
+            <div class="subtitle2">
                 <div class="line"></div>
                 <p>Restauramento da Sua Casa e Sua Vida de Volta em um Estado Precário. </p>
                 <div class="line"></div>
             </div>
-            <div id="content2">
+            <div class="content2">
                 <div>
                     <img src="" alt="">
                     <p>Existem muitos locais na sua casa em Aurora onde podem ocorrer danos causados pela água, desde O
@@ -69,31 +72,31 @@
                     <h3>FALE CONOSCO</h3>
                     <p>DISPONÍVEL 24 HORAS, 7 DIAS POR SEMANA</p>
                     <form action="">
-                        <input type="text" name="name" id="name" placeholder="Nome Completo">
-                        <input type="email" name="email" id="email" placeholder="Email">
-                        <input type="tel" name="phone" id="phone" placeholder="Telefone">
-                        <input type="text" name="message" id="message" placeholder="Como Podemos Ajudar?">
+                        <input type="text" name="name" class="name" placeholder="Nome Completo">
+                        <input type="email" name="email" class="email" placeholder="Email">
+                        <input type="tel" name="phone" class="phone" placeholder="Telefone">
+                        <input type="text" name="message" class="message" placeholder="Como Podemos Ajudar?">
                         <input type="submit" value="ENVIAR MENSAGEM">
                     </form>
                 </div>
             </div>
         </section>
-        <section id="sec3">
+        <section class="sec3">
             <div>
                 <h2>VOCÊ PRECISA DE SERVIÇO DE RESTAURAÇÃO?</h2>
                 <button> PEÇA SUA COTAÇÃO</button>
             </div>
         </section>
-        <section id="sec4">
-            <div id="title4">
+        <section class="sec4">
+            <div class="title4">
                 <h2>Saiba mais sobre os serviços de restauração</h2>
             </div>
-            <div id="subtitle4">
+            <div class="subtitle4">
                 <div class="line"></div>
                 <p>Entenda</p>
                 <div class="line"></div>
             </div>
-            <div id="content4">
+            <div class="content4">
                 <div>
                     <img src="" alt="" srcset="">
                     <p>Restauração por danos causados por água</p>
@@ -120,9 +123,8 @@
             </div>
         </section>
     </main>
+    <footer>
+        <p>&copy;2023 Fullstack PU10</p>
+        <address>Instrutores: <a href="./darlan.html">Darlan Mendes</a> and <a href="./caca.html">Caca</a></address>
+    </footer>
 </body>
-
-<footer>
-    <p>&copy;2023 Fullstack PU10</p>
-    <address>Instrutores: <a href="./darlan.html">Darlan Mendes</a> and <a href="./caca.html">Caca</a></address>
-</footer>
