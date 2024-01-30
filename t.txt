@@ -1,0 +1,543 @@
+
+Copyright (C) Microsoft Corporation. Todos os direitos reservados.
+
+Instale o PowerShell mais recente para obter novos recursos e aprimoramentos! https://aka.ms/PSWindows
+
+PS C:\Program Files\PostgreSQL\16\bin> .\psql.exe -U postgres
+Senha para usuário postgres:
+psql (16.1)
+AVISO: página de código do Console (850) difere da página de código do Windows (1252)
+         caracteres de 8 bits podem não funcionar corretamente. Veja página de
+         referência do psql "Notes for Windows users" para obter detalhes.
+Digite "help" para ajuda.
+
+postgres=# create database teste
+postgres-# \l
+                                                                Lista dos bancos de dados
+   Nome    |   Dono   | CodificaþÒo | Locale Provider |        Collate         |         Ctype          | ICU Locale | ICU Rules | PrivilÚgios de acesso
+-----------+----------+-------------+-----------------+------------------------+------------------------+------------+-----------+-----------------------
+ postgres  | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           |
+ template0 | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           | =c/postgres          +
+           |          |             |                 |                        |                        |            |           | postgres=CTc/postgres
+ template1 | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           | =c/postgres          +
+           |          |             |                 |                        |                        |            |           | postgres=CTc/postgres
+(3 registros)
+
+
+postgres-# ;
+CREATE DATABASE
+postgres=# \l
+                                                                Lista dos bancos de dados
+   Nome    |   Dono   | CodificaþÒo | Locale Provider |        Collate         |         Ctype          | ICU Locale | ICU Rules | PrivilÚgios de acesso
+-----------+----------+-------------+-----------------+------------------------+------------------------+------------+-----------+-----------------------
+ postgres  | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           |
+ template0 | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           | =c/postgres          +
+           |          |             |                 |                        |                        |            |           | postgres=CTc/postgres
+ template1 | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           | =c/postgres          +
+           |          |             |                 |                        |                        |            |           | postgres=CTc/postgres
+ teste     | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           |
+(4 registros)
+
+
+postgres=# \c teste
+Você está conectado agora ao banco de dados "teste" como usuário "postgres".
+teste=# create table pessoas
+teste-# (
+teste(# id serial not null primary key,
+teste(# nome varchar not null,
+teste(# idade integer not null,
+teste(# );
+ERRO:  erro de sintaxe em ou próximo a ")"
+LINHA 6: );
+         ^
+teste=# create table pessoas (
+teste(# id serial not null primary key,
+teste(# nome varchar not null,
+teste(# idade integer not null
+teste(# )
+teste-# ;
+CREATE TABLE
+teste=# \dt
+           Lista de relaþ§es
+ Esquema |  Nome   |  Tipo  |   Dono
+---------+---------+--------+----------
+ public  | pessoas | tabela | postgres
+(1 registro)
+
+
+teste=# \d pessoas
+                                 Tabela "public.pessoas"
+ Coluna |       Tipo        | Collation | Nullable |               Default
+--------+-------------------+-----------+----------+-------------------------------------
+ id     | integer           |           | not null | nextval('pessoas_id_seq'::regclass)
+ nome   | character varying |           | not null |
+ idade  | integer           |           | not null |
+═ndices:
+    "pessoas_pkey" PRIMARY KEY, btree (id)
+
+
+teste=# insert into pessoas (nome, idade) values ('Thiago', 22), ('Caca', 26);
+INSERT 0 2
+teste=# select * from pessoas;
+ id |  nome  | idade
+----+--------+-------
+  1 | Thiago |    22
+  2 | Caca   |    26
+(2 registros)
+
+
+teste=# help
+Você está utilizando o psql, um cliente de linha de comando do PostgreSQL.
+Digite:  \copyright para mostrar termos de distribuição
+         \h para ajuda com comandos SQL
+         \? para ajuda com comandos do psql
+         \g ou terminar com ponto-e-vírgula para executar a consulta
+         \q para sair
+teste=# \h
+Ajuda disponÝvel:
+  ABORT                            CREATE USER MAPPING
+  ALTER AGGREGATE                  CREATE VIEW
+  ALTER COLLATION                  DEALLOCATE
+  ALTER CONVERSION                 DECLARE
+  ALTER DATABASE                   DELETE
+  ALTER DEFAULT PRIVILEGES         DISCARD
+  ALTER DOMAIN                     DO
+  ALTER EVENT TRIGGER              DROP ACCESS METHOD
+  ALTER EXTENSION                  DROP AGGREGATE
+  ALTER FOREIGN DATA WRAPPER       DROP CAST
+  ALTER FOREIGN TABLE              DROP COLLATION
+  ALTER FUNCTION                   DROP CONVERSION
+  ALTER GROUP                      DROP DATABASE
+  ALTER INDEX                      DROP DOMAIN
+  ALTER LANGUAGE                   DROP EVENT TRIGGER
+  ALTER LARGE OBJECT               DROP EXTENSION
+  ALTER MATERIALIZED VIEW          DROP FOREIGN DATA WRAPPER
+  ALTER OPERATOR                   DROP FOREIGN TABLE
+  ALTER OPERATOR CLASS             DROP FUNCTION
+  ALTER OPERATOR FAMILY            DROP GROUP
+  ALTER POLICY                     DROP INDEX
+  ALTER PROCEDURE                  DROP LANGUAGE
+  ALTER PUBLICATION                DROP MATERIALIZED VIEW
+  ALTER ROLE                       DROP OPERATOR
+  ALTER ROUTINE                    DROP OPERATOR CLASS
+  ALTER RULE                       DROP OPERATOR FAMILY
+  ALTER SCHEMA                     DROP OWNED
+  ALTER SEQUENCE                   DROP POLICY
+  ALTER SERVER                     DROP PROCEDURE
+  ALTER STATISTICS                 DROP PUBLICATION
+  ALTER SUBSCRIPTION               DROP ROLE
+  ALTER SYSTEM                     DROP ROUTINE
+  ALTER TABLE                      DROP RULE
+  ALTER TABLESPACE                 DROP SCHEMA
+  ALTER TEXT SEARCH CONFIGURATION  DROP SEQUENCE
+  ALTER TEXT SEARCH DICTIONARY     DROP SERVER
+  ALTER TEXT SEARCH PARSER         DROP STATISTICS
+  ALTER TEXT SEARCH TEMPLATE       DROP SUBSCRIPTION
+  ALTER TRIGGER                    DROP TABLE
+  ALTER TYPE                       DROP TABLESPACE
+  ALTER USER                       DROP TEXT SEARCH CONFIGURATION
+  ALTER USER MAPPING               DROP TEXT SEARCH DICTIONARY
+  ALTER VIEW                       DROP TEXT SEARCH PARSER
+  ANALYZE                          DROP TEXT SEARCH TEMPLATE
+  BEGIN                            DROP TRANSFORM
+  CALL                             DROP TRIGGER
+  CHECKPOINT                       DROP TYPE
+  CLOSE                            DROP USER
+  CLUSTER                          DROP USER MAPPING
+  COMMENT                          DROP VIEW
+  COMMIT                           END
+  COMMIT PREPARED                  EXECUTE
+  COPY                             EXPLAIN
+  CREATE ACCESS METHOD             FETCH
+  CREATE AGGREGATE                 GRANT
+  CREATE CAST                      IMPORT FOREIGN SCHEMA
+  CREATE COLLATION                 INSERT
+  CREATE CONVERSION                LISTEN
+  CREATE DATABASE                  LOAD
+  CREATE DOMAIN                    LOCK
+  CREATE EVENT TRIGGER             MERGE
+  CREATE EXTENSION                 MOVE
+  CREATE FOREIGN DATA WRAPPER      NOTIFY
+  CREATE FOREIGN TABLE             PREPARE
+  CREATE FUNCTION                  PREPARE TRANSACTION
+  CREATE GROUP                     REASSIGN OWNED
+  CREATE INDEX                     REFRESH MATERIALIZED VIEW
+  CREATE LANGUAGE                  REINDEX
+  CREATE MATERIALIZED VIEW         RELEASE SAVEPOINT
+  CREATE OPERATOR                  RESET
+  CREATE OPERATOR CLASS            REVOKE
+  CREATE OPERATOR FAMILY           ROLLBACK
+  CREATE POLICY                    ROLLBACK PREPARED
+  CREATE PROCEDURE                 ROLLBACK TO SAVEPOINT
+  CREATE PUBLICATION               SAVEPOINT
+  CREATE ROLE                      SECURITY LABEL
+  CREATE RULE                      SELECT
+  CREATE SCHEMA                    SELECT INTO
+  CREATE SEQUENCE                  SET
+  CREATE SERVER                    SET CONSTRAINTS
+  CREATE STATISTICS                SET ROLE
+  CREATE SUBSCRIPTION              SET SESSION AUTHORIZATION
+  CREATE TABLE                     SET TRANSACTION
+  CREATE TABLE AS                  SHOW
+  CREATE TABLESPACE                START TRANSACTION
+  CREATE TEXT SEARCH CONFIGURATION TABLE
+  CREATE TEXT SEARCH DICTIONARY    TRUNCATE
+  CREATE TEXT SEARCH PARSER        UNLISTEN
+  CREATE TEXT SEARCH TEMPLATE      UPDATE
+  CREATE TRANSFORM                 VACUUM
+  CREATE TRIGGER                   VALUES
+  CREATE TYPE                      WITH
+  CREATE USER
+
+teste=#
+teste=#
+teste=#
+teste=#
+teste=#
+teste=#
+teste=#
+teste=#
+teste=# \?
+Geral
+  \bind [PARAM]...       set query parameters
+  \copyright             mostra termos de uso e distribuiþÒo do PostgreSQL
+  \crosstabview [COLUMNS] execute query and display result in crosstab
+  \errverbose            mostra mensagem de erro mais recente com detalhamento mßximo
+  \g [(OPTIONS)] [FILE]  execute query (and send result to file or |pipe);
+                         \g with no arguments is equivalent to a semicolon
+  \gdesc                 describe result of query, without executing it
+  \gexec                 executa consulta, em seguida, executa cada valor no seu resultado
+  \gset [PREFIX]         execute query and store result in psql variables
+  \gx [(OPTIONS)] [FILE] as \g, but forces expanded output mode
+  \q                     sair do psql
+  \watch [[i=]SEC] [c=N] execute query every SEC seconds, up to N times
+
+Ajuda
+  \? [commands]          mostra ajuda sobre comandos de barra invertida
+  \? options             mostra ajuda sobre opþ§es de linha de comando do psql
+  \? variables           mostra ajuda sobre varißveis especiais
+  \h [NOME]              mostra sintaxe dos comandos SQL, * para todos os comandos
+
+Buffer de consulta
+  \e [ARQUIVO] [LINHA]    edita o buffer de consulta (ou arquivo) com um editor externo
+  \ef [NOMEFUNÃ├O [LINHA]] edita a definiþÒo de funþÒo com um editor externo
+  \ev [NOMEVIS├O [LINHA]] edita a definiþÒo de visÒo com um editor externo
+  \p                     mostra o conte·do do buffer de consulta
+  \r                     reinicia (apaga) o buffer de consulta
+  \w [ARQUIVO]           escreve o buffer de consulta para arquivo
+
+Entrada/SaÝda
+  \copy ...              realiza comando SQL COPY dos dados para mßquina cliente
+  \echo [-n] [STRING]    write string to standard output (-n for no newline)
+  \i ARQUIVO             executa comandos de um arquivo
+  \ir ARQUIVO            como \i, mas relativo ao local do script atual
+  \o [ARQUIVO]           envia todos os resultados da consulta para arquivo ou |pipe
+  \qecho [-n] [STRING]   write string to \o output stream (-n for no newline)
+  \warn [-n] [STRING]    write string to standard error (-n for no newline)
+
+Conditional
+  \if EXPR               begin conditional block
+  \elif EXPR             alternative within current conditional block
+  \else                  final alternative within current conditional block
+  \endif                 end conditional block
+
+Informativo
+  (opþ§es: S = mostra objetos do sistema, + = detalhes)
+  \d[S+]                 lista tabelas, vis§es e sequÛncias
+  \d[S+]  NOME           descreve tabela, visÒo, sequÛncia ou Ýndice
+  \da[S]  [MODELO]       lista funþ§es de agregaþÒo
+  \dA[+]  [MODELO]       lista mÚtodos de acesso
+  \dAc[+] [AMPTRN [TYPEPTRN]]  list operator classes
+  \dAf[+] [AMPTRN [TYPEPTRN]]  list operator families
+  \dAo[+] [AMPTRN [OPFPTRN]]   list operators of operator families
+  \dAp[+] [AMPTRN [OPFPTRN]]   list support functions of operator families
+  \db[+]  [MODELO]       lista tablespaces
+  \dc[S+]  [MODELO]      lista convers§es
+  \dconfig[+] [PATTERN]  list configuration parameters
+  \dC[+]  [MODELO]       lista convers§es de tipos
+  \dd[S]  [MODELO]       mostra comentßrios de objetos que nÒo aparecem em outro lugar
+  \dD[S+] [MODELO]       lista domÝnios
+  \ddp    [MODELO]       lista privilÚgios padrÒo
+  \dE[S+] [MODELO]       lista tabelas externas
+  \des[+] [MODELO]       lista servidores externos
+  \det[+] [MODELO]       lista tabelas externas
+  \deu[+] [MODELO]       lista mapeamento de usußrios
+  \dew[+] [MODELO]       lista adaptadores de dados externos
+  \df[anptw][S+] [FUNCPTRN [TYPEPTRN ...]]
+                         list [only agg/normal/procedure/trigger/window] functions
+  \dF[+]  [MODELO]       lista configuraþ§es de busca textual
+  \dFd[+] [MODELO]       lista dicionßrios de busca textual
+  \dFp[+] [MODELO]       lista analisadores de busca textual
+  \dFt[+] [MODELO]       lista modelos de busca textual
+  \dg[S+] [MODELO]       lista roles
+  \di[S+] [MODELO]       lista Ýndices
+  \dl[+]                 list large objects, same as \lo_list
+  \dL[S+] [MODELO]       lista linguagens procedurais
+  \dm[S+] [MODELO]       lista vis§es materializadas
+  \dn[S+] [MODELO]       lista esquemas
+  \do[S+] [OPPTRN [TYPEPTRN [TYPEPTRN]]]
+                         list operators
+  \dO[S+] [MODELO]       lista ordenaþ§es
+  \dp[S]  [PATTERN]      list table, view, and sequence access privileges
+  \dP[itn+] [PATTERN]    list [only index/table] partitioned relations [n=nested]
+  \drds [ROLEPTRN [DBPTRN]] list per-database role settings
+  \drg[S] [PATTERN]      list role grants
+  \dRp[+] [PATTERN]      list replication publications
+  \dRs[+] [PATTERN]      list replication subscriptions
+  \ds[S+] [MODELO]       lista sequÛncias
+  \dt[S+] [MODELO]       lista tabelas
+  \dT[S+] [MODELO]       lista tipos de dados
+  \du[S+] [MODELO]       lista roles
+  \dv[S+] [MODELO]       lista vis§es
+  \dx[+]  [MODELO]       lista extens§es
+  \dX     [PATTERN]      list extended statistics
+  \dy[+]  [PATTERN]      list event triggers
+  \l[+]   [MODELO]       lista bancos de dados
+  \sf[+]  NOMEFUNÃ├O     edita a definiþÒo da funþÒo
+  \sv[+]  NOMEVIS├O      edita a definiþÒo da visÒo
+  \z[S]   [PATTERN]      same as \dp
+
+Objetos Grandes
+  \lo_export LOBOID FILE write large object to file
+  \lo_import FILE [COMMENT]
+                         read large object from file
+  \lo_list[+]            list large objects
+  \lo_unlink LOBOID      delete a large object
+
+FormataþÒo
+  \a                     alterna entre modo de saÝda desalinhado e alinhado
+  \C [TEXTO]             define o tÝtulo da tabela, ou apaga caso nada seja especificado
+  \f [TEXTO]             mostra ou define separador de campos para saÝda de consulta desalinhada
+  \H                     alterna para modo de saÝda em HTML (atual desabilitado)
+  \pset [NAME [VALUE]]   set table output option
+                         (border|columns|csv_fieldsep|expanded|fieldsep|
+                         fieldsep_zero|footer|format|linestyle|null|
+                         numericlocale|pager|pager_min_lines|recordsep|
+                         recordsep_zero|tableattr|title|tuples_only|
+                         unicode_border_linestyle|unicode_column_linestyle|
+                         unicode_header_linestyle)
+  \t [on|off]            mostra somente registros (atual desabilitado)
+  \T [TEXTO]             define atributos do marcador HTML <table> ou apaga caso nada seja especificado
+  \x [on|off|auto]       alterna para saÝda expandida (atual desabilitado)
+
+ConexÒo
+  \c[onnect] {[NOMEBD|- USU┴RIO|- M┴QUINA|- PORTA|-] | conninfo}
+                         conecta a um novo banco de dados (atualmente "teste")
+  \conninfo              mostra informaþÒo sobre conexÒo atual
+  \encoding [CODIFICAÃ├O] mostra ou define codificaþÒo do cliente
+  \password [USU┴RIO]    altera a senha de um usußrio com seguranþa
+
+Sistema Operacional
+  \cd [DIRETËRIO]        muda o diret¾rio de trabalho atual
+  \getenv PSQLVAR ENVVAR fetch environment variable
+  \setenv NOME [VALOR]   define ou apaga varißvel de ambiente
+  \timing [on|off]       alterna para duraþÒo da execuþÒo de comandos (atualmente desabilitado)
+  \! [COMANDO]           executa comando na shell ou inicia shell interativa
+
+Varißveis
+  \prompt [TEXTO] NOME   pergunta o usußrio ao definir uma varißvel interna
+  \set [NOME [VALOR]]    define varißvel interna ou lista todos caso nÒo tenha parÔmetros
+  \unset NOME            apaga (exclui) varißvel interna
+
+teste=#
+teste=#
+teste=#
+teste=#
+teste=#
+teste=#
+teste=#
+teste=# drop index
+teste-# ;
+ERRO:  erro de sintaxe em ou próximo a ";"
+LINHA 2: ;
+         ^
+teste=# drop index 1;
+ERRO:  erro de sintaxe em ou próximo a "1"
+LINHA 1: drop index 1;
+                    ^
+teste=# drop index pessoas 1;
+ERRO:  erro de sintaxe em ou próximo a "1"
+LINHA 1: drop index pessoas 1;
+                            ^
+teste=# delete from pessoas
+teste-# where name = 'Thiago';
+ERRO:  coluna "name" não existe
+LINHA 2: where name = 'Thiago';
+               ^
+DICA:  Perhaps you meant to reference the column "pessoas.nome".
+teste=# where nome = 'Thiago';
+ERRO:  erro de sintaxe em ou próximo a "where"
+LINHA 1: where nome = 'Thiago';
+         ^
+teste=# delete from pessoas
+teste-# where nome = 'Thiago';
+DELETE 1
+teste=# \d pessoas
+                                 Tabela "public.pessoas"
+ Coluna |       Tipo        | Collation | Nullable |               Default
+--------+-------------------+-----------+----------+-------------------------------------
+ id     | integer           |           | not null | nextval('pessoas_id_seq'::regclass)
+ nome   | character varying |           | not null |
+ idade  | integer           |           | not null |
+═ndices:
+    "pessoas_pkey" PRIMARY KEY, btree (id)
+
+
+teste=# select * from pessoas
+teste-# ;
+ id | nome | idade
+----+------+-------
+  2 | Caca |    26
+(1 registro)
+
+
+teste=#
+teste=# insert into pessoas (nome, idade) values ('Thiago', 22);
+INSERT 0 1
+teste=# select * from pessoas
+teste-# ;
+ id |  nome  | idade
+----+--------+-------
+  2 | Caca   |    26
+  3 | Thiago |    22
+(2 registros)
+
+
+teste=# delete from pessoas;
+DELETE 2
+teste=# drop table pessoas
+teste-# ;
+DROP TABLE
+teste=# create table pessoas1 (
+teste(# id serial not null primary key,
+teste(# );
+ERRO:  erro de sintaxe em ou próximo a ")"
+LINHA 3: );
+         ^
+teste=# create table pessoas1 (
+teste(# id serial not null primary key);
+CREATE TABLE
+teste=# \dt
+           Lista de relaþ§es
+ Esquema |   Nome   |  Tipo  |   Dono
+---------+----------+--------+----------
+ public  | pessoas1 | tabela | postgres
+(1 registro)
+
+
+teste=# drop table *;
+ERRO:  erro de sintaxe em ou próximo a "*"
+LINHA 1: drop table *;
+                    ^
+teste=# drop table *
+teste-# ;
+ERRO:  erro de sintaxe em ou próximo a "*"
+LINHA 1: drop table *
+                    ^
+teste=# drop table;
+ERRO:  erro de sintaxe em ou próximo a ";"
+LINHA 1: drop table;
+                   ^
+teste=# drop schema public cascade;
+NOTA:  removendo em cascata tabela pessoas1
+DROP SCHEMA
+teste=# \dt
+Did not find any relations.
+teste=# create schema public;
+CREATE SCHEMA
+teste=# \dt
+Did not find any relations.
+teste=# \c postgres
+Você está conectado agora ao banco de dados "postgres" como usuário "postgres".
+postgres=# \dt
+Did not find any relations.
+postgres=# \l
+                                                                Lista dos bancos de dados
+   Nome    |   Dono   | CodificaþÒo | Locale Provider |        Collate         |         Ctype          | ICU Locale | ICU Rules | PrivilÚgios de acesso
+-----------+----------+-------------+-----------------+------------------------+------------------------+------------+-----------+-----------------------
+ postgres  | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           |
+ template0 | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           | =c/postgres          +
+           |          |             |                 |                        |                        |            |           | postgres=CTc/postgres
+ template1 | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           | =c/postgres          +
+           |          |             |                 |                        |                        |            |           | postgres=CTc/postgres
+ teste     | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           |
+(4 registros)
+
+
+postgres=# drop database teste;
+DROP DATABASE
+postgres=# \l
+                                                                Lista dos bancos de dados
+   Nome    |   Dono   | CodificaþÒo | Locale Provider |        Collate         |         Ctype          | ICU Locale | ICU Rules | PrivilÚgios de acesso
+-----------+----------+-------------+-----------------+------------------------+------------------------+------------+-----------+-----------------------
+ postgres  | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           |
+ template0 | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           | =c/postgres          +
+           |          |             |                 |                        |                        |            |           | postgres=CTc/postgres
+ template1 | postgres | UTF8        | libc            | Portuguese_Brazil.1252 | Portuguese_Brazil.1252 |            |           | =c/postgres          +
+           |          |             |                 |                        |                        |            |           | postgres=CTc/postgres
+(3 registros)
+
+
+postgres=# create database agenda_telefonica;
+CREATE DATABASE
+postgres=# \c agenda_telefonica
+Você está conectado agora ao banco de dados "agenda_telefonica" como usuário "postgres".
+agenda_telefonica=# create table pessoas(
+agenda_telefonica(# id serial not null primary key,
+agenda_telefonica(# nome varchar not null,
+agenda_telefonica(# idade integer not null
+agenda_telefonica(# );
+CREATE TABLE
+agenda_telefonica=# create table telefones(
+agenda_telefonica(# id serial not null primary key,
+agenda_telefonica(# telefone varchar not null unique,
+agenda_telefonica(# id_pessoa integer not null foreign key
+agenda_telefonica(# );
+ERRO:  erro de sintaxe em ou próximo a "foreign"
+LINHA 4: id_pessoa integer not null foreign key
+                                    ^
+agenda_telefonica=# create table telefones(
+agenda_telefonica(# id serial not null primary key,
+agenda_telefonica(# telefone varchar not null unique,
+agenda_telefonica(# id_pessoa integer not null references pessoas(id)
+agenda_telefonica(# );
+CREATE TABLE
+agenda_telefonica=# insert into pessoas (nome, idade) values ('Thiago', 22),('j',1),('l',2),('k',3),('o',4);
+INSERT 0 5
+agenda_telefonica=# insert into pessoas (telefone, id_pessoa) values ('4002',1),('2344',1),('1234',2),('3456',3),('9876',4);
+ERRO:  coluna "telefone" da relação "pessoas" não existe
+LINHA 1: insert into pessoas (telefone, id_pessoa) values ('4002',1),...
+                              ^
+agenda_telefonica=# insert into telefones (telefone, id_pessoa) values ('4002',1),('2344',1),('1234',2),('3456',3),('9876',4);
+INSERT 0 5
+agenda_telefonica=# delete from telefones
+agenda_telefonica-# where id_pessoa = 1;
+DELETE 2
+agenda_telefonica=# delete from pessoas p
+agenda_telefonica-# where not exists (
+agenda_telefonica(# select from telefones t
+agenda_telefonica(# where t.id_pessoa = p.id
+agenda_telefonica(# );
+DELETE 2
+agenda_telefonica=# select * from pessoas;
+ id | nome | idade
+----+------+-------
+  2 | j    |     1
+  3 | l    |     2
+  4 | k    |     3
+(3 registros)
+
+
+agenda_telefonica=# delete from pessoas p
+agenda_telefonica-# where not exists (
+agenda_telefonica(# select from telefones t
+agenda_telefonica(# where t.id_pessoa = p.id
+agenda_telefonica(# );
+DELETE 0
+agenda_telefonica=# delete from pessoas p
+agenda_telefonica-# where exists (
+agenda_telefonica(# select from telefones t
+agenda_telefonica(# where t.id_pessoa = p.id
+agenda_telefonica(# );
+ERRO:  atualização ou exclusão em tabela "pessoas" viola restrição de chave estrangeira "telefones_id_pessoa_fkey" em "telefones"
+DETALHE:  Chave (id)=(2) ainda é referenciada pela tabela "telefones".
