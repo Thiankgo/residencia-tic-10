@@ -33,6 +33,8 @@ delete from pessoas where id = 2 cascade;
 
 select p.*, COUNT(*) as "Qnt. telefones" from pessoas as p inner join telefones as t on p.id = t.id_pessoa where p.idade > 24  group by p.id;
 
+select * from pessoas limit 2;
+
 create database spotify_manha;
 
 \c spotify_manha
@@ -151,7 +153,8 @@ create table users(
  id serial not null primary key,
  name varchar not null,
  email varchar not null unique,
- password varchar not null
+ password varchar not null,
+ created_at timestamp not null
 );
 
 create table addresses(
@@ -176,8 +179,25 @@ create table phones(
  on delete cascade
 );
 
+create table category(
+ id serial not null primary key,
+ category varchar not null unique
+);
+
 create table products(
-  id serial not null primary key,
+ id serial not null primary key,
+ product_name varchar not null,
+ price real not null,
+ id_category integer not null
+);
+
+create table orders(
+ id serial not null primary key,
+ id_user integer not null references users(id),
+ id_product integer not null references products(id),
+ status varchar not null,
+ price real not null,
+ created_at timestamp not null
 );
 
 
