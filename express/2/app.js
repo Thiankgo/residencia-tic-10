@@ -45,8 +45,35 @@ app.post("/pessoas/add", async (req, res) => {
 })
 
 
-app.post("/pessoas/edit/:email", async (req, res) => {
-    return res.status(200).json(people)
+app.post("/pessoas/edit", async (req, res) => {
+    try {
+        const { name, email, phones } = req.body;
+
+        const client = await pool.connect();
+//todo
+        const insertQuery = "update into people (name, email) values ($1, $2) returning id;"
+        var data = await client.query(insertQuery, [name, email])
+        var idPerson = data.rows[0].id;
+
+        if (idPerson != undefined) {
+            const insertQueryPhone = "insert into phones (phone, id_people) values ($1, $2);"
+            if (phones && phones.length > 0) {
+                for (let phone of phones) {
+                    var data = await client.query(insertQueryPhone,
+                        [phone, idPerson])
+                }
+            }
+        }
+
+        client.release();
+
+        return res.status(200).json({ name, email, phones } )
+    }
+    catch (err) {
+        console.log("erro ao add person")
+        return res.status(500).send(err)
+
+    }
 })
 
 app.listen(port, async () => {
