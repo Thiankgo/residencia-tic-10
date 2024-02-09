@@ -1,53 +1,71 @@
+const fs = require('fs').promises
+
+async function loadFile(filename) {
+    var file = "[]"
+
+    try {
+        file = await fs.readFile(filename, 'utf-8', 'r')
+    } catch (error) {
+        if (error.code === 'ENOENT'){
+            await fs.writeFile(filename,file, () => { })
+            return JSON.parse(await file)
+        }
+        throw error
+    }
+    
+    return JSON.parse(await file)
+}
+
 async function listPeople(peoples) {
     for (let people of peoples) {
         console.log(`Name: ${people.name}, Email: ${people.email}, Phone: ${people.phone}`)
     }
 }
 
-async function addOnePeople(peoples) {
-    var name = prompt(`Qual o nome? `);
-    var email = prompt(`Qual o email? `);
-    var phone = prompt(`Qual o telefone? `);
-    peoples.push({ name: name, email: email, phone: phone })
-    await fs.writeFile("./js/mini-projeto/people.json", JSON.stringify(peoples, undefined, 2))
+async function addOnePeople(filename, peoples, new_people) {
+    peoples.push(new_people)
+    await fs.writeFile(filename, JSON.stringify(peoples, undefined, 2))
+    return new_people
 }
 
-async function removeOnePeople(peoples, i) {
+async function removeOnePeople(filename, peoples, email) {
+    let i = peoples.findIndex((p) => p.email == email)
     if (i === undefined) {
+        console.log(`o email ${email} não existe`)
     } else {
         peoples.splice(i, 1)
-        await fs.writeFile("./js/mini-projeto/people.json", JSON.stringify(peoples, undefined, 2))
+        await fs.writeFile(filename, JSON.stringify(peoples, undefined, 2))
     }
 }
 
-async function editOnePeople(peoples, i, param, val) {
-    if (param == "email" || param == "name" || param == "phone") {
-        peoples[i][param] = val
-        await fs.writeFile("./js/mini-projeto/people.json", JSON.stringify(peoples, undefined, 2))
+async function editOnePeople(filename, peoples, email, param, val) {
+    let i = peoples.findIndex((p) => p.email == email)
+    if (i === undefined) {
+        console.log(`o email ${email} não existe`)
     } else {
-        console.log(`o parmaetro ${param} não existe`)
+        if (param == "email" || param == "name" || param == "phone") {
+            peoples[i][param] = val
+            await fs.writeFile(filename, JSON.stringify(peoples, undefined, 2))
+        } else {
+            console.log(`o parmaetro ${param} não existe`)
+        }
     }
-
 }
 
-async function findOnePeople(peoples, id) {
-    let people = peoples[id]
+async function findOnePeople(peoples, email) {
+    let people = peoples.find((p) => p.email == email)
     if (people === undefined) {
+        console.log(`o email ${email} não existe`)
     } else {
-        console.log("Name: ", people.name, "Email: ", people.email)
+        return people
     }
-    return people
-}
-
-async function exitProgram() {
-    process.exit()
 }
 
 module.exports = {
+    loadFile,
     listPeople,
     addOnePeople,
     removeOnePeople,
     editOnePeople,
-    findOnePeople,
-    exitProgram
+    findOnePeople
 }

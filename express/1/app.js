@@ -1,8 +1,8 @@
 const express = require('express')
 
 const utils = require('./utils.js')
-const fs = require('fs').promises
 
+let filename = "./people.json"
 let peoples = []
 
 const app = express()
@@ -15,20 +15,25 @@ app.get("/pessoas", (req, res) => {
     return res.status(200).json(peoples)
 })
 
-app.get("/pessoas/:id", (req, res) => {
-    const people = utils.findOnePeople(Number.parseInt(peoples,req.params.id))
+app.get("/pessoas/:email", async (req, res) => {
+    const people = await utils.findOnePeople(peoples,req.params.email)
     return res.status(200).json(people)
 })
 
-const load = async () => {
-    var file = fs.readFile("./people.json", 'utf-8', 'r')
-    peoples = JSON.parse(await file)
-}
+app.post("/pessoas", async (req, res) => {
+    const people = await utils.addOnePeople(filename,peoples,req.body)
+    return res.status(200).json(people)
+})
 
-app.listen(port, () => {
-    load()
+app.listen(port, async () => {
+    peoples = await utils.loadFile("./people.json")
+    console.log(peoples)
     console.log(`Server started at https://localhost:${port}/`)
 })
+
+
+
+
 
 
 
